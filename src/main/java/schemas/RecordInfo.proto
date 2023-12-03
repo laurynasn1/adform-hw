@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package protobuf;
+option java_package = "proto";
+option java_outer_classname = "RecordProto";
+
+message RecordInfo {
+    string user_agent = 1;
+    string type = 2;
+    string time_interval = 3;
+    int64 record_count = 4;
+    double average_between_records = 5;
+}
