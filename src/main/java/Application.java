@@ -21,13 +21,16 @@ public class Application {
             RecordProcessor recordProcessor = new RecordProcessor();
 
             var clicks = reader.readClicks();
+            if (clicks != null) {
+                var clickResults = recordProcessor.processRecords(clicks, userAgent, "clicks");
+                writer.writeResults(clickResults);
+            }
+
             var impressions = reader.readImpressions();
-
-            var clickResults = recordProcessor.processRecords(clicks, userAgent, "clicks");
-            var impressionResults = recordProcessor.processRecords(impressions, userAgent, "impressions");
-
-            writer.writeResults(clickResults);
-            writer.writeResults(impressionResults);
+            if (impressions != null) {
+                var impressionResults = recordProcessor.processRecords(impressions, userAgent, "impressions");
+                writer.writeResults(impressionResults);
+            }
         }
     }
 

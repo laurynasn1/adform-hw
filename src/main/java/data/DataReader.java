@@ -38,7 +38,7 @@ public class DataReader implements AutoCloseable {
         if (Files.exists(METADATA_FILE)) {
             try {
                 for (var line : Files.readAllLines(METADATA_FILE)) {
-                    var strings = line.split(" ");
+                    var strings = line.split("\\|");
                     processedFiles.put(strings[0], strings[1]);
                 }
             } catch (IOException ex) {
@@ -83,7 +83,7 @@ public class DataReader implements AutoCloseable {
     public void close() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(METADATA_FILE.toFile()))) {
             for (var entry : processedFiles.entries()) {
-                writer.write(entry.getKey() + " " + entry.getValue());
+                writer.write(entry.getKey() + "|" + entry.getValue());
                 writer.newLine();
             }
         } catch (IOException ex) {
