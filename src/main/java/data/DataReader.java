@@ -68,7 +68,7 @@ public class DataReader implements AutoCloseable {
                 return null;
             }
             var dataset = records.get();
-            return dataset.where(dataset.col("device_settings.user_agent").like(userAgent));
+            return dataset.where(dataset.col("device_settings.user_agent").equalTo(userAgent));
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
