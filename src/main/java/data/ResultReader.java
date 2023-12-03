@@ -25,9 +25,14 @@ public class ResultReader {
             for (var rec : recs) {
                 RecordProto.RecordInfo result = RecordProto.RecordInfo.parseFrom(rec.value());
 
+                String dateTime = result.getDateTime();
+                String date = dateTime.substring(0, 8);
+                int hour = Integer.parseInt(dateTime.substring(8));
+                String interval = String.format("%s %d:00 - %s %d:00", date, hour, date, hour + 1);
+
                 System.out.println("User agent: " + result.getUserAgent());
                 System.out.println("Record type: " + result.getType());
-                System.out.println("Time interval: " + result.getTimeInterval());
+                System.out.println("Time interval: " + interval);
                 System.out.println("Record count: " + result.getRecordCount());
                 System.out.println("Average time between subsequent events: " + result.getAverageBetweenRecords());
                 System.out.println();
