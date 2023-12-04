@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Java 14+, Maven, Docker Compose
+Java 14+ (tested with 14 and 17), Maven, Docker Compose
 
 ## Preparation
 

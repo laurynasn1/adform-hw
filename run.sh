@@ -9,4 +9,9 @@ if [ "$#" -ne 2 ]; then
   exit 1
 fi
 
-java -cp ${SCRIPT_DIR}/target/adform-homework-1.0-SNAPSHOT-jar-with-dependencies.jar Application "$@"
+JAVA_VER=$(java -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1)
+if [ $JAVA_VER -ge 17 ]; then
+  VM_OPTS="--add-exports java.base/sun.nio.ch=ALL-UNNAMED"
+fi
+
+java ${VM_OPTS} -cp ${SCRIPT_DIR}/target/adform-homework-1.0-SNAPSHOT-jar-with-dependencies.jar Application "$@"
